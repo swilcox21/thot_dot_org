@@ -170,8 +170,8 @@ class ThotView(APIView):
             thots.append(ser_thot.data)
         return Response(thots, status=status.HTTP_202_ACCEPTED)
     def delete(self,request,thot_id):
-        t = get_object_or_404(Mindset.objects.all(), id=thot_id)
-        thot = get_object_or_404(Mindset.objects.all(), id=thot_id)
+        t = get_object_or_404(Thot.objects.all(), id=thot_id)
+        thot = get_object_or_404(Thot.objects.all(), id=thot_id)
         thot.delete()
         return Response({"message": "thots: `{}` has been deleted".format(t)}, status=status.HTTP_202_ACCEPTED)
 
