@@ -12,7 +12,7 @@ class ReminderSerializer(serializers.ModelSerializer):
     char3 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     class Meta:
         model = Reminder
-        fields = ['text','id','owner','recurring','completed','order','char1','char2','char3','int1','int2','int3','bool1','bool2','bool3','bool4','bool5','bool5','bool6','bool7','bool8','bool9']
+        fields = ['text','order','id','owner','recurring','completed','char1','char2','char3','int1','int2','int3','bool1','bool2','bool3','bool4','bool5','bool5','bool6','bool7','bool8','bool9']
     def update(self, instance, validated_data):
         instance.order = validated_data.get('order', instance.order)
         instance.recurring = validated_data.get('recurring', instance.recurring)
@@ -49,7 +49,7 @@ class _DaySerializer(serializers.ModelSerializer):
 class _DailySerializer(serializers.ModelSerializer): 
     class Meta:                                 
         model = Daily
-        fields = ['text','id','order']
+        fields = ['text','order','id']
 
 class DailySerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -61,7 +61,7 @@ class DailySerializer(serializers.ModelSerializer):
     char3 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     class Meta:
         model = Daily
-        fields = ['created_date','text','id','day','show','order','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
+        fields = ['created_date','text','order','id','show','day','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
     def update(self, instance, validated_data):
         instance.day = validated_data.get('day', instance.day)
         instance.text = validated_data.get('text', instance.text)
@@ -133,7 +133,7 @@ class _MindsetSerializer(serializers.ModelSerializer):
 class _ThotSerializer(serializers.ModelSerializer): 
     class Meta:                                 
         model = Thot
-        fields = ['text','id','order']
+        fields = ['text','order','id']
 
 class ThotSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
@@ -144,7 +144,7 @@ class ThotSerializer(serializers.ModelSerializer):
     char3 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     class Meta:
         model = Thot
-        fields = ['text','mindset','id','created_date','order','show','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']   
+        fields = ['text','order','id','created_date','show','mindset','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']   
     def update(self, instance, validated_data):
         instance.mindset = validated_data.get('mindset', instance.mindset)
         instance.text = validated_data.get('text', instance.text)
@@ -181,7 +181,7 @@ class MindsetSerializer(serializers.ModelSerializer):
     thots = _ThotSerializer(many=True, required=False)
     class Meta:
         model = Mindset
-        fields = ['name','id','owner','order','image','thots','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
+        fields = ['name','order','id','owner','image','thots','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
     def update(self, instance, validated_data):
         instance.image = validated_data.get('image', instance.image)
         instance.name = validated_data.get('name', instance.name)
