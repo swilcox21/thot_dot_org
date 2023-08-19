@@ -201,7 +201,7 @@ class MindsetView(APIView):
             if ser_mindset.is_valid(raise_exception=True):
                 ser_mindset.save()
             mindsets.append(ser_mindset.data)
-        return Response(mindsets.data, status=status.HTTP_202_ACCEPTED)
+        return Response(mindsets, status=status.HTTP_202_ACCEPTED)
     def delete(self,request,mindset_id):
         ms = get_object_or_404(Mindset.objects.all(), id=mindset_id)
         mindset = get_object_or_404(Mindset.objects.all(), id=mindset_id)
