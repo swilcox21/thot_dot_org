@@ -195,10 +195,10 @@ class MindsetView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def put(self,request):
         mindsets = []
-        for f in request.data:
-            mindset = get_object_or_404(Mindset.objects.all(), id=f.get('id'))
-            print('!!!!!USER:!!!!!!', f)
-            ser_mindset = MindsetSerializer(instance=mindset, data=f, partial=True)
+        for m in request.data:
+            mindset = get_object_or_404(Mindset.objects.all(), id=m.get('id'))
+            print('!!!!!USER:!!!!!!', m)
+            ser_mindset = MindsetSerializer(instance=mindset, data=m, partial=True)
             print('!!!!!USER:!!!!!!', request)
             if ser_mindset.is_valid(raise_exception=True):
                 ser_mindset.save()

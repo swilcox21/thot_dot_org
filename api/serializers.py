@@ -183,6 +183,7 @@ class MindsetSerializer(serializers.ModelSerializer):
         model = Mindset
         fields = ['name','order','id','owner','image','thots','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
     def update(self, instance, validated_data):
+        instance.order = validated_data.get('order', instance.order)
         instance.image = validated_data.get('image', instance.image)
         instance.name = validated_data.get('name', instance.name)
         instance.char1 = validated_data.get('char1', instance.char1)
