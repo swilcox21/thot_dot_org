@@ -197,9 +197,7 @@ class MindsetView(APIView):
         mindsets = []
         for m in request.data:
             mindset = get_object_or_404(Mindset.objects.all(), id=m.get('id'))
-            print('!!!!!USER:!!!!!!', m)
             ser_mindset = MindsetSerializer(instance=mindset, data=m, partial=True)
-            print('!!!!!USER:!!!!!!', request)
             if ser_mindset.is_valid(raise_exception=True):
                 ser_mindset.save()
             mindsets.append(ser_mindset.data)
