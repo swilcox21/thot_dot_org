@@ -113,7 +113,7 @@ class DaysView(APIView):
 class DayView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     def get(self, request):
-        print('request.data', self.kwargs.get('date'))
+        print('request.data', self.query_params)
         day = Day.objects.filter(owner=request.user.id, name="Friday")
         serialized_day = DaySerializer(day, many=True)
         return Response(serialized_day.data)
