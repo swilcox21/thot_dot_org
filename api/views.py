@@ -109,6 +109,11 @@ class DaysView(APIView):
         all_days = Day.objects.filter(owner=request.user.id)
         serializer = DaySerializer(all_days, many=True)
         return Response(serializer.data)
+    def delete(self,request,day_id):
+        d = get_object_or_404(Day.objects.all(), id=day_id)
+        day = get_object_or_404(Day.objects.all(), id=day_id)
+        day.delete()
+        return Response({"message": "day: `{}` has been deleted".format(d)}, status=status.HTTP_202_ACCEPTED)
     
 class DayView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
