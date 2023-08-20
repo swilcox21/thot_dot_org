@@ -115,8 +115,8 @@ class DayView(APIView):
     def get(self, request):
         print('request.data', self)
         name = self.query_params.get('name', None)
-        day = Day.objects.filter(owner=request.user.id, name=name)
-        serialized_day = DaySerializer(day)
+        day = Day.objects.filter(owner=request.user.id)
+        serialized_day = DaySerializer(day, many=True)
         return Response(serialized_day.data)
     def post(self, request):
         serializer = DaySerializer(data=request.data, many=True)
