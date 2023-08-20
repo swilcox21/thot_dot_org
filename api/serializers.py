@@ -97,7 +97,7 @@ class DaySerializer(serializers.ModelSerializer):
     char1 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     char2 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     char3 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
-    dailys = _DailySerializer(many=True, required=False)
+    dailys = DailySerializer(many=True, required=False)
     class Meta:
         model = Day
         fields = ['name','created_date','id','owner','weather','dailys','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
@@ -178,7 +178,7 @@ class MindsetSerializer(serializers.ModelSerializer):
     char1 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     char2 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     char3 = serializers.CharField(required=False, allow_blank=True, max_length=5000)
-    thots = _ThotSerializer(many=True, required=False)
+    thots = ThotSerializer(many=True, required=False)
     class Meta:
         model = Mindset
         fields = ['name','order','id','owner','image','thots','char1','char2','char3','int1','int2','int3','int4','int5','int6','bool1','bool2','bool3','bool4','bool5','bool5','bool6']
