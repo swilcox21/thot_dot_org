@@ -14,7 +14,7 @@ urlpatterns = [
     path('reminder/', ReminderView.as_view()),
     path('reminder/<int:reminder_id>', ReminderView.as_view()),
     path('day/', DayView.as_view()),
-    re_path(r'^day/(?P<date>[\w-]+)/$', DayView.as_view()),
+    re_path(r'^day/(?P<date>[\w\-]+)/$', DayView.as_view()),
     path('days/', DaysView.as_view()),
     path('daily/', DailyView.as_view()),
     path('daily/<int:daily_id>', DailyView.as_view()),
