@@ -184,7 +184,7 @@ class MindsetView(APIView):
             serialized_mindset = MindsetSerializer(mindset)
             return Response(serialized_mindset.data)
         all_mindsets = Mindset.objects.filter(owner=request.user.id)
-        serializer = _MindsetSerializer(all_mindsets, many=True)
+        serializer = MindsetSerializer(all_mindsets, many=True)
         return Response(serializer.data)
     def post(self, request):
         serializer = MindsetSerializer(data=request.data, many=True)
