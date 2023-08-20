@@ -107,7 +107,7 @@ class DaysView(APIView):
             serialized_day = DaySerializer(day)
             return Response(serialized_day.data)
         all_days = Day.objects.filter(owner=request.user.id)
-        serializer = _DaySerializer(all_days, many=True)
+        serializer = DaySerializer(all_days, many=True)
         return Response(serializer.data)
     
 class DayView(APIView):
