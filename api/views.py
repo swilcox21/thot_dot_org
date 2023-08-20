@@ -112,15 +112,11 @@ class DaysView(APIView):
     
 class DayView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
-    def get(self, request, day_id=None):
+    def get(self, request):
         print('request.data', self)
-        if day_id is not None:
-            day = get_object_or_404(Day.objects.filter(owner=request.user.id), id = day_id)
-            serialized_day = DaySerializer(day)
-            return Response(serialized_day.data)
-        days = Day.objects.filter(owner=request.user.id)
-        serializer = DaySerializer(days, many=True)
-        return Response(serializer.data)
+        day = get_object_or_404(Day.objects.filter(owner=request.user.id), created_date = self.kwargs.get('date'))
+        serialized_day = DaySerializer(day)
+        return Response(serialized_day.data)
     def post(self, request):
         serializer = DaySerializer(data=request.data, many=True)
         print('user', request.user)
