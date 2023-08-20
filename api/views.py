@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from api.permissions import IsOwnerOrReadOnly
 from api.models import Reminder, Daily, Day, Thot, Mindset
-from api.serializers import UserSerializer, ReminderSerializer, DailySerializer, DaySerializer, ThotSerializer, MindsetSerializer, _MindsetSerializer
+from api.serializers import UserSerializer, ReminderSerializer, DailySerializer, DaySerializer, _DaySerializer, ThotSerializer, MindsetSerializer, _MindsetSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -96,7 +96,9 @@ class DailyView(APIView):
         daily.delete()
         return Response({"message": "daily: `{}` has been deleted".format(d)}, status=status.HTTP_202_ACCEPTED)
 
-class DayView(APIView):
+
+
+class DaysView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     def get(self, request, day_id=None):
         print('request.data', self)
@@ -105,7 +107,19 @@ class DayView(APIView):
             serialized_day = DaySerializer(day)
             return Response(serialized_day.data)
         all_days = Day.objects.filter(owner=request.user.id)
-        serializer = DaySerializer(all_days, many=True)
+        serializer = _DaySerializer(all_days, many=True)
+        return Response(serializer.data)
+    
+class DayView(APIView):
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    def get(self, request, day_id=None):
+        print('request.data', self)
+        if day_id is not None:
+            day = get_object_or_404(Day.objects.all(), id = day_id)
+            serialized_day = DaySerializer(day)
+            return Response(serialized_day.data)
+        day = Day.objects.filter(created_date=request.data.created_date)
+        serializer = DaySerializer(day, many=True)
         return Response(serializer.data)
     def post(self, request):
         serializer = DaySerializer(data=request.data, many=True)
