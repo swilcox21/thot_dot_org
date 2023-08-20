@@ -114,7 +114,8 @@ class DayView(APIView):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     def get(self, request):
         print('request.data', self)
-        day = get_object_or_404(Day.objects.all(), name=self.query_params.get('name'))
+        name = self.query_params.get('name', None)
+        day = get_object_or_404(Day.objects.all(), name=name)
         serialized_day = DaySerializer(day)
         return Response(serialized_day.data)
     def post(self, request):
