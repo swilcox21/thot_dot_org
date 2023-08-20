@@ -13,7 +13,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('reminder/', ReminderView.as_view()),
     path('reminder/<int:reminder_id>', ReminderView.as_view()),
-    path('day/$', DayView.as_view()),
+    path('day/', DayView.as_view()),
     path('days/<int:day_id>', DayView.as_view()),
     path('days/', DaysView.as_view()),
     path('daily/', DailyView.as_view()),
