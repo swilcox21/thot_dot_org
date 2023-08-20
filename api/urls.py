@@ -1,5 +1,5 @@
 # from unicodedata import name
-from django.urls import include, path
+from django.urls import include, path, re_path
 from rest_framework import routers
 from .views import UserViewSet, ReminderView, DayView, DaysView, DailyView, MindsetView, ThotView
 
@@ -14,8 +14,9 @@ urlpatterns = [
     path('reminder/', ReminderView.as_view()),
     path('reminder/<int:reminder_id>', ReminderView.as_view()),
     path('day/', DayView.as_view()),
-    path('day/<int:day_id>', DayView.as_view()),
+    re_path(r'^day/?P<created_date>[\w\-]+/$', DayView.as_view()),
     path('days/', DaysView.as_view()),
+    path('days/<int:day_id>', DaysView.as_view()),
     path('daily/', DailyView.as_view()),
     path('daily/<int:daily_id>', DailyView.as_view()),
     path('mindset/', MindsetView.as_view()),
