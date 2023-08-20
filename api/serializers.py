@@ -129,7 +129,7 @@ class _MindsetSerializer(serializers.ModelSerializer):
     name = serializers.CharField(required=False, allow_blank=True, max_length=5000)
     class Meta:                                 
         model = Mindset
-        fields = ['name','id','owner']
+        fields = ['name','order','id','owner']
 class _ThotSerializer(serializers.ModelSerializer): 
     class Meta:                                 
         model = Thot
